@@ -30,7 +30,7 @@ $(function () {
     $.each(data["@graph"][0].items, function (i) {
 
       //作者が不明（undefined）な場合は、「作者不明」と、作者がわかる場合は作者名を表示するようcreatorsに代入。
-      var creators = (`${data["@graph"][0].items[i]["dc:creator"]}` === "undefined") ? "作者不明" : `${data["@graph"][0].items[i]["dc:creator"]}`;
+      let creators = (`${data["@graph"][0].items[i]["dc:creator"]}` === "undefined") ? "作者不明" : `${data["@graph"][0].items[i]["dc:creator"]}`;
 
       //受け取ったdata（本のタイトル、作者、出版社、リンク）をそれぞれ表示したい為、「html」に代入。lists-itemの中にlist-innerを作成。そのさらに中には本のタイトル、作者、出版社、リンク表示用の各要素を作成。
       let html = `
@@ -69,8 +69,8 @@ $(function () {
     pageCount = 1;//pageCountを初期値にする
   })
 
-  var pageCount = 1;//pageCountを１と定義。
-  var searchWord;//searchWordを空の状態で定義。
+  let pageCount = 1;//pageCountを１と定義。
+  let searchWord;//searchWordを空の状態で定義。
 
   //search-btnをクリックしたら、
   $(".search-btn").on("click", function () {

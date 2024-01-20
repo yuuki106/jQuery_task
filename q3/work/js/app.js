@@ -1,33 +1,20 @@
 $(function () {
-
   // drawer_buttonをクリックした時、
   $(".drawer_button").on("click", function () {
-
-    // drawer_buttonにopenedクラスが付いていたら以下の処理を行う。
-    if ($(".drawer_button").hasClass("opened")) {
-
-      $(".drawer_bg").fadeOut();//背景を無効にする。
-      $(".drawer_nav_wrapper").css("transform", "");//メニューの一覧をCSSで設定したように右側に隠す。
-      $(".drawer_menu_text").show();//「MENU」の文字を表示する。
-      $(".drawer_close").hide();//「CLOSE」の文字を隠す。
-      $(".drawer_button").removeClass("active");//drawer_buttonからactiveを外し、元の３本線に戻す
-      $(".drawer_button").removeClass("opened");//drawer_button から openedを外す。
-
-      // drawer_buttonにopenedクラスが付いていなかったら以下の処理を行う。
-    } else {
-
-      $(".drawer_bg").fadeIn();//背景を有効にする
-      $(".drawer_nav_wrapper").css("transform", "none");//右に隠れたメニューの一覧を元の位置に戻す。
-      $(".drawer_menu_text").hide();//「MENU」の文字を隠す。
-      $(".drawer_close").show();//「CLOSE」の文字を表示する。
-      $(".drawer_button").addClass("active");//drawer_buttonにactiveを付与させ、MENU３本線を✖️にする。
-      $(".drawer_button").addClass("opened");//drawer_button に openedを付与。
-    };
-
+    // .drawer_nav_wrapperに「open」クラスが有効の場合は無効に、無効の場合は有効に切り替え画面内での表示・非表示を切り替える
+    $(".drawer_nav_wrapper").toggleClass("open");
+    // 「this」に「active」クラスが有効の場合は無効に、無効の場合は有効に切り替えメニューボタンの表示形式(MENUかCLOSEか)を切り替える。
+    $(this).toggleClass("active");
+    // 「.drawer_bg」背景色の表示・非表示を切り替える。
+    $(".drawer_bg").fadeToggle();
   });
-
-  
-
-
-
+  // .drawer_bg（背景色）をクリックした時、
+  $(".drawer_bg").on("click", function(){
+    // .drawer_nav_wrapperから「open」クラスを取り除き、画面内非表示に切り替える
+    $(".drawer_nav_wrapper").removeClass("open");
+    // .drawer_buttonから「active」クラスを取り除きメニューボタンの表示を「MENU」へ切り替える
+    $(".drawer_button").removeClass("active");
+    // 「.drawer_bg」背景色を非表示へ切り替える。
+    $(this).fadeOut();
+  })
 });

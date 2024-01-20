@@ -1,5 +1,4 @@
 $(function () {
-
   // OPENボタン(modal_open_button)を押すと、
   $(".modal_open_button").on("click", function () {
     // モーダルがフェードイン(ゆっくり表示)される。
@@ -10,5 +9,4 @@ $(function () {
     // モーダルがフェードアウト(ゆっくり非表示)される。
     $(".modal_win").fadeOut();
   });
-
 });
