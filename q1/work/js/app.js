@@ -31,10 +31,8 @@ $(function () {
 
   // 5つ目のbtnをクリックした時、
   $("#q5").on("click", function () {
-    // 5つ目のbtnの外側の前後にそれぞれ以下の文を挿入。
-    $(this).before("DOMの前").after("DOMの後");
-    // 5つ目のbtnの内側の前後にそれぞれ以下の文を挿入。
-    $(this).append("DOMの中の後").prepend("DOMの中の前");
+    // 5つ目のbtnの外側・内側にそれぞれ以下の文を挿入。
+    $(this).before("DOMの前").after("DOMの後").append("DOMの中の後").prepend("DOMの中の前");
   });
 
   // ---------------q6---------------
