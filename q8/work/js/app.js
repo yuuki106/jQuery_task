@@ -89,10 +89,5 @@ $(function () {
     }).fail(function () {//通信失敗時。
       ajaxFail();//ajaxFail関数を呼び出す
     })
-
   });
-
-
-
-
 })
