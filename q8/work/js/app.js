@@ -2,7 +2,7 @@
 $(function () {
 
   function ajaxFail(data) {//「ajaxFail」という関数を作り、通信失敗時の処理を書いていく。
-    if ($.isEmptyObject(data)) {//もし受け取ったdataが空だった場合、
+    if (data === undefined) {//もし受け取ったdataが空(undefined)だった場合、
       //通信失敗時に表示させたいアナウンスを変数「errorText」に代入。なお表示させたいアナウンスには「message」クラスをつける。
       const errorText = `
         <div class="message">
@@ -11,6 +11,7 @@ $(function () {
         </div>
       `;
       $(".lists").empty().append(errorText);//メッセージの重複表示を防ぐ為、「empty()」で削除してからerrorTextを追加
+      console.log(data);
     }
   };
 
@@ -28,19 +29,9 @@ $(function () {
 
       //ajax通信で受け取った「data」をeachで繰り返し処理。
       $.each(data["@graph"][0].items, function (i) {
-        let bookCreator = data["@graph"][0].items[i]["dc:creator"];//受け取った作者名を「bookCreator」へ代入。
-        let bookPublisher = data["@graph"][0].items[i]["dc:publisher"];//受け取った出版社名を「bookPublisher」へ代入。
-        let bookTitle = data["@graph"][0].items[i].title//受け取ったタイトル名を「bookTitle」へ代入。
-
-        if (typeof bookCreator === "undefined") {//もしbookCreatorがundefinedの場合、
-          bookCreator = "作者不明";//bookCreatorに作者不明を代入
-        }
-        if (typeof bookPublisher === "undefined") {//もしbookPublisherがundefinedの場合、
-          bookPublisher = "出版社不明";//bookPublisherに出版社不明を代入
-        }
-        if (typeof bookTitle === "undefined") {//もしbookTitleがundefinedの場合、
-          bookTitle = "タイトル不明";//bookTitleにタイトル不明を代入
-        }
+        let bookCreator = data["@graph"][0].items[i]["dc:creator"]===undefined? "作者不明": data["@graph"][0].items[i]["dc:creator"];//data["@graph"][0].items[i]["dc:creator"]がundefinedの場合は「作者不明」を代入。そうでない場合はdata["@graph"][0].items[i]["dc:creator"]を代入
+        let bookPublisher = data["@graph"][0].items[i]["dc:publisher"]===undefined ? "出版社":data["@graph"][0].items[i]["dc:publisher"];//data["@graph"][0].items[i]["dc:publisher"]がundefinedの場合は「出版社不明」を代入。そうでない場合はdata["@graph"][0].items[i]["dc:publisher"]を代入
+        let bookTitle = data["@graph"][0].items[i].title===undefined ? "タイトル不明":data["@graph"][0].items[i].title//data["@graph"][0].items[i].titleがundefinedの場合は「タイトル不明」を代入。そうでない場合はdata["@graph"][0].items[i].titleを代入
 
         //受け取ったdata（本のタイトル、作者、出版社、リンク）をそれぞれ表示したい為、「html」に代入。lists-itemの中にlist-innerを作成。そのさらに中には本のタイトル、作者、出版社、リンク表示用の各要素を作成。
         const html = `
