@@ -1,9 +1,12 @@
 
 $(function () {
 
-  function ajaxFail() {//「ajaxFail」という関数を作り、通信失敗時の処理を書いていく。
-    if ("400 Bad Request") {//もし400 Bad Requestだった場合、
+  function ajaxFail(data) {//「ajaxFail」という関数を作り、通信失敗時の処理を書いていく。
+    // console.log(data.readyState);
+    // console.log(data.status);
+    if (data.status === 0) {//もし400 Bad Requestだった場合、
       //通信失敗時に表示させたいアナウンスを変数「errorText」に代入。なお表示させたいアナウンスには「message」クラスをつける。
+      console.log
       const errorText = `
         <div class="message">
           <p>正常に通信できませんでした。<br>
@@ -11,6 +14,8 @@ $(function () {
         </div>
       `;
       $(".lists").empty().append(errorText);//メッセージの重複表示を防ぐ為、「empty()」で削除してからerrorTextを追加
+      console.log("あああ")
+
     }
   };
 
@@ -28,9 +33,9 @@ $(function () {
 
       //ajax通信で受け取った「data」をeachで繰り返し処理。
       $.each(data["@graph"][0].items, function (i) {
-        const bookCreator = data["@graph"][0].items[i]["dc:creator"]===undefined? "作者不明": data["@graph"][0].items[i]["dc:creator"];//data["@graph"][0].items[i]["dc:creator"]がundefinedの場合は「作者不明」を代入。そうでない場合はdata["@graph"][0].items[i]["dc:creator"]を代入
-        const bookPublisher = data["@graph"][0].items[i]["dc:publisher"]===undefined ? "出版社":data["@graph"][0].items[i]["dc:publisher"];//data["@graph"][0].items[i]["dc:publisher"]がundefinedの場合は「出版社不明」を代入。そうでない場合はdata["@graph"][0].items[i]["dc:publisher"]を代入
-        const bookTitle = data["@graph"][0].items[i].title===undefined ? "タイトル不明":data["@graph"][0].items[i].title//data["@graph"][0].items[i].titleがundefinedの場合は「タイトル不明」を代入。そうでない場合はdata["@graph"][0].items[i].titleを代入
+        const bookCreator = data["@graph"][0].items[i]["dc:creator"] === undefined ? "作者不明" : data["@graph"][0].items[i]["dc:creator"];//data["@graph"][0].items[i]["dc:creator"]がundefinedの場合は「作者不明」を代入。そうでない場合はdata["@graph"][0].items[i]["dc:creator"]を代入
+        const bookPublisher = data["@graph"][0].items[i]["dc:publisher"] === undefined ? "出版社" : data["@graph"][0].items[i]["dc:publisher"];//data["@graph"][0].items[i]["dc:publisher"]がundefinedの場合は「出版社不明」を代入。そうでない場合はdata["@graph"][0].items[i]["dc:publisher"]を代入
+        const bookTitle = data["@graph"][0].items[i].title === undefined ? "タイトル不明" : data["@graph"][0].items[i].title//data["@graph"][0].items[i].titleがundefinedの場合は「タイトル不明」を代入。そうでない場合はdata["@graph"][0].items[i].titleを代入
 
         //受け取ったdata（本のタイトル、作者、出版社、リンク）をそれぞれ表示したい為、「html」に代入。lists-itemの中にlist-innerを作成。そのさらに中には本のタイトル、作者、出版社、リンク表示用の各要素を作成。
         const html = `
@@ -76,8 +81,8 @@ $(function () {
     }).done(function (data) {//通信成功時、
       ajaxDone(data)//ajaxDone関数を呼び出す
 
-    }).fail(function (e) {//通信失敗時。
-      ajaxFail(e);//ajaxFail関数を呼び出す
+    }).fail(function (date) {//通信失敗時。
+      ajaxFail(date);//ajaxFail関数を呼び出す
     })
   });
 })
