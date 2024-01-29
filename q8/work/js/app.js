@@ -2,9 +2,7 @@
 $(function () {
 
   function ajaxFail(data) {//「ajaxFail」という関数を作り、通信失敗時の処理を書いていく。
-    // console.log(data.readyState);
-    // console.log(data.status);
-    if (data.status === 0) {//もし400 Bad Requestだった場合、
+    if (data.status === 0) {//もしdata.statusが0だった場合、
       //通信失敗時に表示させたいアナウンスを変数「errorText」に代入。なお表示させたいアナウンスには「message」クラスをつける。
       console.log
       const errorText = `
@@ -14,7 +12,6 @@ $(function () {
         </div>
       `;
       $(".lists").empty().append(errorText);//メッセージの重複表示を防ぐ為、「empty()」で削除してからerrorTextを追加
-      console.log("あああ")
 
     }
   };
