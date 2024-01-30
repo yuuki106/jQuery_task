@@ -4,7 +4,6 @@ $(function () {
   function ajaxFail(data) {//「ajaxFail」という関数を作り、通信失敗時の処理を書いていく。
     if (data.status === 0) {//もしdata.statusが0だった場合、
       //通信失敗時に表示させたいアナウンスを変数「errorText」に代入。なお表示させたいアナウンスには「message」クラスをつける。
-      console.log
       const errorText = `
         <div class="message">
           <p>正常に通信できませんでした。<br>
