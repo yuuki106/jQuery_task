@@ -11,7 +11,7 @@ $(function () {
           インターネットの接続の確認をしてください。</p>
         </div>
       `;
-      $(".lists").empty().append(errorText);//メッセージの重複表示を防ぐ為、「empty()」で削除してからerrorTextを追加
+      $(".lists").empty().append(errorText);//メッセージの重複表示を防ぐ為、「empty()」で削除してからerrorTextを追加 
     } else {//statusが0以外のエラーが発生した場合、
       //表示させたいアナウンスを変数「othersErrorText」に代入。なお表示させたいアナウンスには「message」クラスをつける。
       const othersErrorText = `
