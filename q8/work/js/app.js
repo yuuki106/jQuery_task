@@ -21,7 +21,7 @@ $(function () {
         </div>
       `;
       $(".lists").empty().append(othersErrorText);//メッセージの重複表示を防ぐ為、「empty()」で削除してからothersErrorTextを追加
-    };
+    }
   };
 
   function ajaxDone(doneData) {//「ajaxDone」という関数を作り、通信成功時の処理を書いていく。
