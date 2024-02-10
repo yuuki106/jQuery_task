@@ -12,7 +12,7 @@ $(function () {
       `;
       $(".lists").empty().append(errorText);//メッセージの重複表示を防ぐ為、「empty()」で削除してからerrorTextを追加 
       
-    } else if(failData.status === 400){//statusが400(空欄)だった場合、
+    } else if(failData.status === 400){//statusが400(検索欄空欄)だった場合、
       //通信失敗時に表示させたいアナウンスを変数「ErrorText400」に代入。なお表示させたいアナウンスには「message」クラスをつける。
       const ErrorText400 = `
         <div class="message">
