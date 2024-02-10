@@ -2,7 +2,6 @@
 $(function () {
 
   function ajaxFail(failData) {//「ajaxFail」という関数を作り、通信失敗時の処理を書いていく。
-    console.log(failData.status);
     if (failData.status === 0) {//もしfailData.statusが0だった場合、
       //通信失敗時に表示させたいアナウンスを変数「errorText」に代入。なお表示させたいアナウンスには「message」クラスをつける。
       const errorText = `
@@ -12,7 +11,18 @@ $(function () {
         </div>
       `;
       $(".lists").empty().append(errorText);//メッセージの重複表示を防ぐ為、「empty()」で削除してからerrorTextを追加 
-    } else {//statusが0以外のエラーが発生した場合、
+      
+    } else if(failData.status === 400){//statusが400(空欄)だった場合、
+      //通信失敗時に表示させたいアナウンスを変数「ErrorText400」に代入。なお表示させたいアナウンスには「message」クラスをつける。
+      const ErrorText400 = `
+        <div class="message">
+          <p>検索キーワードが有効ではありません。<br>
+          1文字以上で検索して下さい。</p>
+        </div>
+      `;
+      $(".lists").empty().append(ErrorText400);//メッセージの重複表示を防ぐ為、「empty()」で削除してからErrorText400を追加
+
+    }else {//statusが0以外のエラーが発生した場合、
       //表示させたいアナウンスを変数「othersErrorText」に代入。なお表示させたいアナウンスには「message」クラスをつける。
       const othersErrorText = `
         <div class="message">
@@ -82,7 +92,7 @@ $(function () {
     //ajax通信の準備を行う。
     $.ajax({
       url: `https://ci.nii.ac.jp/books/opensearch/search?title=${searchWord}&p=${pageCount}&format=json&count=20`,//通信先のURLを設定。
-      type: "GET",//データを「受け取る」に設定。
+      type: 'GET',//データを「受け取る」に設定。
     }).done(function (doneData) {//通信成功時、
       ajaxDone(doneData)//ajaxDone関数を呼び出す
 
