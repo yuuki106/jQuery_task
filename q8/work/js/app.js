@@ -13,14 +13,14 @@ $(function () {
       $(".lists").empty().append(errorText);//メッセージの重複表示を防ぐ為、「empty()」で削除してからerrorTextを追加 
       
     } else if(failData.status === 400){//statusが400(検索欄空欄)だった場合、
-      //通信失敗時に表示させたいアナウンスを変数「ErrorText400」に代入。なお表示させたいアナウンスには「message」クラスをつける。
-      const ErrorText400 = `
+      //通信失敗時に表示させたいアナウンスを変数「errorText400」に代入。なお表示させたいアナウンスには「message」クラスをつける。
+      const errorText400 = `
         <div class="message">
           <p>検索キーワードが有効ではありません。<br>
           1文字以上で検索して下さい。</p>
         </div>
       `;
-      $(".lists").empty().append(ErrorText400);//メッセージの重複表示を防ぐ為、「empty()」で削除してからErrorText400を追加
+      $(".lists").empty().append(errorText400);//メッセージの重複表示を防ぐ為、「empty()」で削除してからErrorText400を追加
 
     }else {//statusが0以外のエラーが発生した場合、
       //表示させたいアナウンスを変数「othersErrorText」に代入。なお表示させたいアナウンスには「message」クラスをつける。
